@@ -1,0 +1,6 @@
+require "open-uri"
+require "nokogiri"
+require "pry"
+require_relative "./wired_awaker/version"
+require_relative "./wired_awaker/stories"
+require_relative "./wired_awaker/cli"
