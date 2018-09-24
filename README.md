@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-Just run wired_awaker/bin/wired_awaker and the cli will give you further insructions.
+Just run wired_awaker/bin/wired_awaker and the cli will give you further instructions.
 
 ## Development
 
