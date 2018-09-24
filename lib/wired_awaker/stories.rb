@@ -44,27 +44,20 @@ class WiredAwaker::Stories
     conv = selected.to_i-1
     url_completer = "https://www.wired.co.uk" + "#{@selected_urls[conv]}"
     doco_three = Nokogiri::HTML(open("#{url_completer}"))
-    stories = {}
+    titles =[]
 
-      titles = doco_three.search("h2.bb-h2").collect{ |s|
-        mm = self.new
-        mm.title = s.text unless s.text == "Popular on WIRED"
+      doco_three.search("h2.bb-h2")[0..-3].collect{ |s|
+        unless s.text.include?("Popular on WIRED")
+         titles << s.text
+        end
       }
 
      sto = doco_three.search("/html/body/article/div/div/div/p")[2..-5].collect{ |s|
-        
-         stories[:story_body] = s.children.text
+
+        s.children.text
       }
 
-      binding.pry
-
-     #titles = titles.slice!(-1)
-
-     #self.all.map { |h|
-    #   puts "#{h.title} \n #{h.story_body}"
-     #}
-
-
+      
   end
 
   def self.all
