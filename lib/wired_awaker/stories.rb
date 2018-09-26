@@ -65,10 +65,9 @@ class WiredAwaker::Stories
         mm = self.new
         mm.title = title
         mm.story_body = story
-        puts "#{mm.title} #{mm.story}"
+          puts "\n #{mm.title} \n #{mm.story_body} \n"
       end
 
-      #binding.pry
 
   end
 
