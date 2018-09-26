@@ -10,6 +10,7 @@ class WiredAwaker::Stories
     doco = Nokogiri::HTML(open("https://www.wired.co.uk/topic/wired-awake"))
     doco.css("li article").map{ |stories|
       s = self.new
+      s.url = stories.css("a").attribute("href").value
       s.title = stories.css("a").text
     }
   end
@@ -40,10 +41,14 @@ class WiredAwaker::Stories
   end
 
    def self.scrape_url(selected)
+    self.scrape_stories
     conv = selected.to_i-1
-    url_completer = "https://www.wired.co.uk" + "#{@selected_urls[conv]}"
-    doco_three = Nokogiri::HTML(open("#{url_completer}"))
-    titles =[]
+    urls_collection = self.all.collect{|s| s.url }
+    chosen_day =  urls_collection[conv]
+
+    @url_completer = "https://www.wired.co.uk" + "#{chosen_day}"
+    doco_three = Nokogiri::HTML(open("#{@url_completer}"))
+    titles = []
     stories = []
 
       doco_three.search("h2.bb-h2")[0..-3].collect{ |s|

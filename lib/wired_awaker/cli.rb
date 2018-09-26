@@ -15,39 +15,41 @@ class WiredAwaker::CLI
   end
 
   def choose_weekday
-    @awaker = WiredAwaker::Stories
     weekday = nil
-    puts "Type 1-5 or the weekday you want top news for - Ex. type Tuesday or 2 \n"
-  
+    @awaker = WiredAwaker::Stories
     while weekday != "exit"
-      #puts "\n Would you like to read more?"
-      weekday = gets.chomp.downcase
-      case weekday
-      when "1","monday"
-        puts "Select which Monday to read more about"
-        puts "You can also type exit / Select different weekday: \n "
-        @awaker.scrape_weekday(1)
-      when "2","tuesday"
-        puts "Select which Tuesday to read more about"
-        puts "You can also type exit / Select different weekday: \n "
-        @awaker.scrape_weekday(2) 
-      when "3","wednesday"
-        puts "Select which Wednesday to read more about"
-        puts "You can also type exit / Select different weekday: \n "
-        @awaker.scrape_weekday(3)
-      when "4","thursday"
-        puts "Select which Thursday to read more about"
-        puts "You can also type exit / Select different weekday: \n "
-        @awaker.scrape_weekday(4)
-      when "5","friday"
-        puts "Select which Friday to read more about"
-        puts "You can also type exit / Select different weekday: \n "
-        @awaker.scrape_weekday(5)
-      when "exit"
-        weekday = "exit"
-      else
-        puts " \n Sorry didn't catch that - Please enter a weekday by name / number or exit. \n"
-      end
+      puts "Type 1-12 for the weekday you want to see top news for \n"
+      weekday = gets.chomp
+        case weekday
+        when "1"
+            @awaker.scrape_url(1)
+        when "2"
+            @awaker.scrape_url(2)
+        when "3"
+            @awaker.scrape_url(3)
+        when "4"
+            @awaker.scrape_url(4)
+        when "5"
+            @awaker.scrape_url(5)
+        when "6"
+            @awaker.scrape_url(6)
+        when "7"
+            @awaker.scrape_url(7)
+        when "8"
+            @awaker.scrape_url(8)
+        when "9"
+            @awaker.scrape_url(9)
+        when "10"
+            @awaker.scrape_url(10)
+        when "11"
+            @awaker.scrape_url(11)
+        when "12"
+            @awaker.scrape_url(12)
+        when "exit"
+            weekday = "exit"
+        else
+            puts " \n Sorry didn't catch that - Please enter a number from 1-12 or exit. \n"
+        end
     end
   end
 
