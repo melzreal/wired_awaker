@@ -29,8 +29,7 @@ class WiredAwaker::Stories
     self.all.map { |h|
       if h.title.include?(selected_weekday)
         @selected_stories << h.title unless @selected_stories.include?(h.title)
-        @selected_urls << h.url unless @selected_stories.include?(h.url)
-        #should I change initialize to take in a hash instead of having these two arrays?
+        @selected_urls << h.url unless @selected_urls.include?(h.url)
       end
     }
 
@@ -40,11 +39,12 @@ class WiredAwaker::Stories
 
   end
 
-  def self.scrape_url(selected)
+   def self.scrape_url(selected)
     conv = selected.to_i-1
     url_completer = "https://www.wired.co.uk" + "#{@selected_urls[conv]}"
     doco_three = Nokogiri::HTML(open("#{url_completer}"))
     titles =[]
+    stories = []
 
       doco_three.search("h2.bb-h2")[0..-3].collect{ |s|
         unless s.text.include?("Popular on WIRED")
@@ -52,13 +52,21 @@ class WiredAwaker::Stories
         end
       }
 
-     sto = doco_three.search("/html/body/article/div/div/div/p")[2..-5].collect{ |s|
+      doco_three.search("/html/body/article/div/div/div/p")[2..-5].collect{ |s|
+       stories << s.text
+     }
 
-        s.children.text
-      }
+      [titles,stories].transpose.each do |title, story|
+        mm = self.new
+        mm.title = title
+        mm.story_body = story
+        puts "#{mm.title} #{mm.story}"
+      end
 
-      
+      #binding.pry
+
   end
+
 
   def self.all
     @@all
