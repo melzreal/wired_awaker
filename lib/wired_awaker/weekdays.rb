@@ -1,20 +1,10 @@
 class WiredAwaker::WeekDays
-  attr_accessor :title, :story_body, :url, :day_stories
-  @@all = []
+  attr_accessor :title, :story_body, :url
 
   def initialize
-    @day_stories = []
-    @@all << self
-
+      @@all << self
   end
 
-  def self.stories=(stories)
-    @day_stories << stories
-  end
-
-  def self.stories
-    @day_stories
-  end
 
   def self.all
     @@all

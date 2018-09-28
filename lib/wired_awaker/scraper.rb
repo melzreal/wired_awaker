@@ -36,6 +36,7 @@ class WiredAwaker::Scraper
         mm = WiredAwaker::Stories.new
         mm.title = title
         mm.story_body = story
+        mm.weekday_id = conv+1
         puts "\n #{mm.title} \n #{mm.story_body} \n"
         #WiredAwaker::WeekDays.stories=(mm)
       end
