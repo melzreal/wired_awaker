@@ -1,5 +1,5 @@
 class WiredAwaker::Stories
-  attr_accessor :title, :story_body, :url
+  attr_accessor :title, :story_body, :url, :weekday_id
   @@all = []
 
   def initialize
